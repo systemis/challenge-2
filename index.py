@@ -2,6 +2,10 @@
 import cv2
 import pandas as pd 
 import matplotlib.pyplot as plt
+from os import listdir 
+from os.path  import isfile, join 
+
+onlyfiles = [f for f in listdir('data') if isfile(join('data', f))]
 
 height = 600 
 width = 463
@@ -34,19 +38,25 @@ def show_images(images):
         imshow = plt.imshow(image)
         plt.show()
 
-img_filenames = ['20020025_Phan_BoiChau_3A.png', '20020027_Nguyen_SonTung_3A.png', '20020029_Che_Linh_3A.png', '20020030_Do_TuanNgoc_3A.png', '20020031_Nguyen_TuanDung_3A.png', '20020032_Thai_KhanhNgoc_3A.png', '20020033_Tran_KhanhLy_3A.png', '200250028_Nguyen_NhatAnh_3A.png']
+img_filenames = onlyfiles
 img_list = list()
 student_data_list = list()
 for name in img_filenames: 
+  if name == '.DS_Store': continue
   img = plt.imread('data/' + name)
+  img = cv2.resize(img, (463, 600), interpolation = cv2.INTER_AREA)
   img = img[90:, :]
   img_list.append(img)
   
   name = name.replace('.png', '').split('_')
+  if len(name) < 4: 
+    print(name)
+    continue
   student = [name[0], name[1], name[2], name[3]]
   student_data_list.append(student)
   
-img_test = img_list[0]
+# img_test = img_list[0]
+# show_images([img_test, img_list[1]])
 
 def get_rect_list(contours): 
   rect_list = list() 
@@ -134,15 +144,17 @@ answer_data = detectAnswerData()
 '''
 def grade(checked_data, student, is_statistical=False): 
   score = 0 
+  check =0 
   for (question_index, question_data) in enumerate(checked_data): 
     for j in range(len(question_data)): 
-      if question_data[j]: 
+      if question_data[j] == 1: 
         result = character_table[j]
         student.append(result)
+        check += 1 
         if result == answer_data[question_index]: 
           if is_statistical: statistical_table[question_index] += 1 
           score += 1 
-          break
+        break
   return score
 
 def checkDataInFirstFive(): 
@@ -153,7 +165,7 @@ def checkDataInFirstFive():
     checked_data = checked_data[:5]
     for question_data in checked_data: 
       for j in range(len(question_data)): 
-        if question_data[j]: 
+        if question_data[j] == 1: 
           student.append(character_table[j])
     student_data_copy[i] = student
 
@@ -174,10 +186,12 @@ def generateStudentScore(student_index=0):
   
   checked_data = checked_data
 
+
   score = grade(checked_data, student)
   score = (score / total_question) * 100
+  student.append(score)
+  print(len(student), len(checked_data))
   student_data_copy[i] = student
-  student_data_copy[i].append(score)
   
   student_data_copy = student_data_copy[student_index:student_index+1]
   columns = generateColumns()
@@ -204,6 +218,10 @@ def gradingStudentInClass():
   grading_columns = ['ID', 'Score']
   grading_data = [[item[0], item[-1]] for item in student_data_copy]
   print('---- Generate grading score of class: Done ----\n')
+  # print(student_data_copy)
+  for i in range(len(student_data_copy)): 
+    if len(student_data_copy[i]) > 65: 
+      print(student_data_copy[i])
   grading_data_frame = pd.DataFrame(grading_data, columns=grading_columns)
   grading_data_frame.to_csv('grading.csv')
   return data_frame
@@ -246,7 +264,7 @@ write_csv_file()
 checkDataInFirstFive() 
 
 '''Question 4: Generating all answers of one student'''
-generateStudentScore(7)
+generateStudentScore(20)
 
 '''Question 5: Generating grading.csv'''
 student_data_frame = gradingStudentInClass()
