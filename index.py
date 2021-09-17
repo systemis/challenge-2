@@ -10,6 +10,8 @@ onlyfiles = [f for f in listdir('data') if isfile(join('data', f))]
 height = 600 
 width = 463
 
+# 463, 600
+
 character_table = ['A', 'B', 'C', 'D', 'E']
 answer = 5 
 questions_part = 5
@@ -44,7 +46,7 @@ student_data_list = list()
 for name in img_filenames: 
   if name == '.DS_Store': continue
   img = plt.imread('data/' + name)
-  img = cv2.resize(img, (463, 600), interpolation = cv2.INTER_AREA)
+  img = cv2.resize(img, (width, height), interpolation = cv2.INTER_AREA)
   img = img[90:, :]
   img_list.append(img)
   
@@ -128,6 +130,7 @@ def detect_checked(img, only_firstfive=False):
 def detectAnswerData(): 
   answer_data = ['' for i in range(total_question)]
   answer_image = plt.imread('answer/3A.png')
+  answer_image = cv2.resize(answer_image, (width, height), interpolation = cv2.INTER_AREA)
   answer_image = answer_image[90:, :]
   checked_data = detect_checked(answer_image) 
   for i in range(len(checked_data)): 
@@ -256,6 +259,8 @@ def finalResult(data_frame):
   print('Number of student having score larger than 50%: ', pass_student_count)
   print('Final result of class: ', 'Pass' if (pass_student_count/len(student_data_list))*100 > 50.0 else 'Failed')
   return pass_student_count
+
+# print(answer_data)
 
 '''Question 2: Generating student.csv'''
 write_csv_file()
