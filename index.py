@@ -61,8 +61,6 @@ def write_csv_file():
   if len(student_data_list) == 0: 
     return False
   students = pd.DataFrame(student_data_list, columns=['Student ID', 'Surname', 'First Name', 'Code'])
-  # print(students.head())
-  # print('profile')
   students.to_csv('student.csv', index=False, sep=';')
 
 def check_part(sides, side_pos, pc, result_data): 
@@ -162,7 +160,9 @@ def checkDataInFirstFive():
   columns = ['Student ID', 'Surname', 'First Name', 'Code']
   for i in range(5): columns.append('Question: '+str((i+1)))
   data_frame = pd.DataFrame(student_data_copy, columns=columns)
-  # print(data_frame.head())
+  print('--- Checked of first five question of all student: -----')
+  print(data_frame)
+  print('\n')
 
 def generateStudentScore(student_index=0): 
   student_data_copy = student_data_list.copy()
@@ -182,7 +182,9 @@ def generateStudentScore(student_index=0):
   student_data_copy = student_data_copy[student_index:student_index+1]
   columns = generateColumns()
   data_frame = pd.DataFrame(student_data_copy, columns=columns)
+  print('---- Checked data of student: ', student[2], '----')
   print(data_frame)
+  print('\n')
 
 def gradingStudentInClass(): 
   global statistical_table
@@ -198,7 +200,12 @@ def gradingStudentInClass():
   
   columns = generateColumns()
   data_frame = pd.DataFrame(student_data_copy, columns=columns)
-  data_frame.to_csv('student_grading.csv')
+
+  grading_columns = ['ID', 'Score']
+  grading_data = [[item[0], item[-1]] for item in student_data_copy]
+  print('---- Generate grading score of class: Done ----\n')
+  grading_data_frame = pd.DataFrame(grading_data, columns=grading_columns)
+  grading_data_frame.to_csv('grading.csv')
   return data_frame
 
 # generateStudentScore(7)
@@ -232,8 +239,22 @@ def finalResult(data_frame):
   print('Final result of class: ', 'Pass' if (pass_student_count/len(student_data_list))*100 > 50.0 else 'Failed')
   return pass_student_count
 
+'''Question 2: Generating student.csv'''
+write_csv_file()
+
+'''Question 3: Generating the first 5 answers of one student '''
+checkDataInFirstFive() 
+
+'''Question 4: Generating all answers of one student'''
+generateStudentScore(7)
+
+'''Question 5: Generating grading.csv'''
 student_data_frame = gradingStudentInClass()
+
+'''Question 6: Summary which 3 questions are the most difficult. '''
 findThreeMostDiffQuestion()
+
+'''Question 7: Generating the final result (pass/fail) of the class.'''
 finalResult(student_data_frame)
 
 # for i in range(len(img_list)): 
