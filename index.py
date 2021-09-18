@@ -265,7 +265,7 @@ def finalResult(data_frame):
 '''Question 2: Generating student.csv'''
 write_csv_file()
 
-'''Question 3: Generating the first 5 answers of one student '''
+'''Question 3: Generating the first 5 answers of all student '''
 checkDataInFirstFive() 
 
 '''Question 4: Generating all answers of one student'''
@@ -279,7 +279,3 @@ findThreeMostDiffQuestion()
 
 '''Question 7: Generating the final result (pass/fail) of the class.'''
 finalResult(student_data_frame)
-
-# for i in range(len(img_list)): 
-#   checked_data = detect_checked(img_list[i])
-#   print(checked_data[9])
