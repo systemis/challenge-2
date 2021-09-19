@@ -3,6 +3,13 @@
 
 USG is a automatic score grading tool which is convenient, fast and stable
 
+<<<<<<< HEAD
+=======
+## Notice
+
+The file "index.py" contains the final code after synthesizing all the work, please run this file.
+
+>>>>>>> 0998aa33982505c89b0f5ca423193e6352f88fc5
 ## Features
 
 - Detect and export excel file about student information data
@@ -17,6 +24,7 @@ USG is a automatic score grading tool which is convenient, fast and stable
 
 ## Members
  - ## Pham Van Thinh - 20020025
+<<<<<<< HEAD
  - ## Vy Pham -
 
 ## Run 
@@ -27,3 +35,6 @@ USG is a automatic score grading tool which is convenient, fast and stable
 git clone https://github.com/systemis/challenge-2.git
 cd challenge-2 
 python index.py
+=======
+ - ## Pham Thi Mai Vy - 20020010
+>>>>>>> 0998aa33982505c89b0f5ca423193e6352f88fc5
