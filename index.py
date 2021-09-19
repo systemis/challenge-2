@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from os import listdir 
 from os.path  import isfile, join 
 
-onlyfiles = [f for f in listdir('data') if isfile(join('data', f))]
+data_name_list = [f for f in listdir('data') if isfile(join('data', f))]
 
 height = 600 
 width = 463
@@ -40,7 +40,7 @@ def show_images(images):
         imshow = plt.imshow(image)
         plt.show()
 
-img_filenames = onlyfiles
+img_filenames = data_name_list
 img_list = list()
 student_data_list = list()
 for name in img_filenames: 
