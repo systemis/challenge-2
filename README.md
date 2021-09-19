@@ -36,4 +36,3 @@ cd challenge-2
 python index.py
 =======
  - ## Pham Thi Mai Vy - 20020010
->>>>>>> 0998aa33982505c89b0f5ca423193e6352f88fc5
