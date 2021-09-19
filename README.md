@@ -34,5 +34,3 @@ The file "index.py" contains the final code after synthesizing all the work, ple
 git clone https://github.com/systemis/challenge-2.git
 cd challenge-2 
 python index.py
-=======
- - ## Pham Thi Mai Vy - 20020010
