@@ -192,7 +192,6 @@ def generateStudentScore(student_index=0):
   
   checked_data = checked_data
 
-
   score = grade(checked_data, student)
   score = (score / total_question) * 100
   student.append(score)
@@ -225,6 +224,7 @@ def gradingStudentInClass():
   grading_data = [[item[0], item[-1]] for item in student_data_copy]
   print('---- Generate grading score of class: Done ----\n')
   # print(student_data_copy)
+  print(data_frame)
   for i in range(len(student_data_copy)): 
     if len(student_data_copy[i]) > 65: 
       print(student_data_copy[i])
