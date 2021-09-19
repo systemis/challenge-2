@@ -24,7 +24,7 @@ The file "index.py" contains the final code after synthesizing all the work, ple
 
 ## Members
  - ## Pham Van Thinh - 20020025
- - ## Vy Pham -
+ - ## Pham Mai Vy - 20020010 
 
 ## Run 
 
