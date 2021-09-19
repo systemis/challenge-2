@@ -3,6 +3,10 @@
 
 USG is a automatic score grading tool which is convenient, fast and stable
 
+## Notice
+
+The file "index.py" contains the final code after synthesizing all the work, please run this file.
+
 ## Features
 
 - Detect and export excel file about student information data
