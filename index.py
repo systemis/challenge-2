@@ -133,6 +133,7 @@ def detectAnswerData():
   answer_image = cv2.resize(answer_image, (width, height), interpolation = cv2.INTER_AREA)
   answer_image = answer_image[90:, :]
   checked_data = detect_checked(answer_image) 
+  # show_images([answer_image])
   for i in range(len(checked_data)): 
     for j in range(len(checked_data[i])): 
       if checked_data[i][j]: 
@@ -140,6 +141,8 @@ def detectAnswerData():
   return answer_data
 
 answer_data = detectAnswerData()
+
+# print(answer_data)
 
 '''
   - Grade based on comparison of checked_data 
@@ -253,10 +256,10 @@ def finalResult(data_frame):
   pass_student_count = 0 
   for i in range(0, len(data_frame)): 
     student_score = data_frame.iloc[i]['Score']
-    if student_score > 50.0: 
+    if student_score > 40.0: 
       pass_student_count += 1 
   
-  print('Number of student having score larger than 50%: ', pass_student_count)
+  print('Number of student having score pass: ', pass_student_count)
   print('Final result of class: ', 'Pass' if (pass_student_count/len(student_data_list))*100 > 50.0 else 'Failed')
   return pass_student_count
 
