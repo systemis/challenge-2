@@ -195,7 +195,7 @@ def generateStudentScore(student_index=0):
   score = grade(checked_data, student)
   score = (score / total_question) * 100
   student.append(score)
-  print(len(student), len(checked_data))
+  # print(len(student), len(checked_data))
   student_data_copy[i] = student
   
   student_data_copy = student_data_copy[student_index:student_index+1]
@@ -205,6 +205,12 @@ def generateStudentScore(student_index=0):
   print(data_frame)
   print('\n')
 
+def isempty(arr): 
+  for item in arr: 
+    if item: 
+      return False
+  return True
+
 def gradingStudentInClass(): 
   global statistical_table
   student_data_copy = student_data_list.copy()
@@ -212,6 +218,12 @@ def gradingStudentInClass():
     image = img_list[i]
     student = student_data_copy[i].copy()
     checked_data = detect_checked(image)
+
+    for jk in range(len(checked_data)): 
+      empty = isempty(checked_data[jk ])
+      if empty: 
+        print('is empty')
+
     score = grade(checked_data, student, True)
     score = (score / total_question) * 100
     student.append(score)
