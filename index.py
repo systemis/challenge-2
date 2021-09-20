@@ -1,4 +1,5 @@
 # from imutils.perspective import four_point_transform
+import random
 import cv2
 import pandas as pd 
 import matplotlib.pyplot as plt
@@ -284,7 +285,7 @@ write_csv_file()
 checkDataInFirstFive() 
 
 '''Question 4: Generating all answers of one student'''
-generateStudentScore(20)
+generateStudentScore(random.randint(0, len(student_data_list) - 1))
 
 '''Question 5: Generating grading.csv'''
 student_data_frame = gradingStudentInClass()
